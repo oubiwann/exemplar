@@ -1,6 +1,6 @@
 # exemplar
 
-<img src="resources/images/juggernaut-tiny.png"/><br/>
+<a href="https://raw.github.com/oubiwann/exemplar/master/resources/images/juggernaut-large.png"><img src="resources/images/juggernaut-tiny.png"/></a><br/>
 
 *Markup Language Expressions for LFE: creating HTML with s-expressions on the Erlang VM.*
 
