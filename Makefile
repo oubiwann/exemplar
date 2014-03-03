@@ -68,7 +68,7 @@ compile-only: clean-ebin
 
 compile-tests: clean-eunit
 	mkdir -p $(TEST_OUT_DIR)
-	ERL_LIBS=$(ERL_LIBS) $(LFEC) -o $(TEST_OUT_DIR) $(TEST_DIR)/*_tests.lfe
+	ERL_LIBS=$(ERL_LIBS) $(LFEC) -o $(TEST_OUT_DIR) $(TEST_DIR)/*tests.lfe
 
 shell: compile
 	clear
