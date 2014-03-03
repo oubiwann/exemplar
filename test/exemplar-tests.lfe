@@ -1,4 +1,4 @@
-(defmodule exemplar_tests
+(defmodule exemplar-tests
   (export all)
   (import
     (from lfeunit-util
