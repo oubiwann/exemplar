@@ -54,13 +54,3 @@
 
 (defun self-closing-tag (tag attrs)
   (-opening-tag tag attrs (self-closing-bracket)))
-
-(defun xml (tag content)
-  (++ (opening-tag tag)
-      content
-      (closing-tag tag)))
-
-(defun xml (tag attrs content)
-  (++ (opening-tag tag attrs)
-      content
-      (closing-tag tag)))

@@ -46,11 +46,3 @@
             (: exemplar self-closing-tag
               '"img"
               (list 'class '"pic" 'src '"url"))))
-
-(deftest xml
-  (is-equal '"<pre>some code</pre>"
-            (: exemplar xml '"pre" '"some code")))
-
-(deftest xml-with-attrs
-  (is-equal '"<pre class=\"lisp\">some code</pre>"
-            (: exemplar xml '"pre" '(class "lisp") '"some code")))
