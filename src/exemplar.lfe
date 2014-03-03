@@ -1,8 +1,6 @@
 (defmodule exemplar
   (export all))
 
-(include-file "include/macros.lfe")
-
 (defun space () '" ")
 
 (defun slash () '"/")
@@ -24,8 +22,8 @@
 
 (defun attrs-to-string (attrs)
   (let (((tuple names values) (: lfe-utils partition-list attrs)))
-    (apply #'++/2
-           (: lists zipwith #'attr-to-string/2 names values))))
+    (: lists concat
+      (: lists zipwith #'attr-to-string/2 names values))))
 
 (defun -opening-tag (tag bracket)
   (++ (opening-bracket)
@@ -66,6 +64,3 @@
   (++ (opening-tag tag attrs)
       content
       (closing-tag tag)))
-
-(defun xml-self-closing (tag)
-  '"")
