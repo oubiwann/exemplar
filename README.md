@@ -104,6 +104,7 @@ Then, you can ``make shell``, ``slurp`` that file, and use your new element:
 
 ```cl
     > (slurp '"src/my-project.lfe")
+    #(ok my-project)
     > (custom-elem (custom-elem '"much wow"))
 ```
 
@@ -111,6 +112,65 @@ Which will give the following output
 
 ```html
     "<custom-elem><custom-elem>much wow</custom-elem></custom-elem>"
+```
+
+#### Current Limitations
+
+Right now, the ``defelem`` macro which generates all the HTML functions only
+generates functions with three different arities. For instance,
+``include/html-macros.lfe`` defines the ``div`` element:
+
+```cl
+(defelem div)
+```
+
+The ``defelem`` macro in ``include/macros.lfe`` generates three functions:
+
+* ``div/0``
+* ``div/1``
+* ``div/2``
+
+We can see these three aritiies in action by slurping ``src/exemplar-html.lfe``
+and calling these functions:
+
+```cl
+    > (slurp '"src/exemplar-html.lfe")
+    #(ok exemplar-html)
+    > (div)
+    "<div />"
+    > (div '"some content")
+    "<div>some content</div>"
+    > (div '(class "some-css") '"some content")
+    "<div class=\"some-css\">some content</div>"
+```
+
+What this means is that (for now) you cannot do something like this:
+
+```cl
+    > (div (p '"paragraph 1") (p '"paragraph 2") (p '"paragraph 3"))
+    exception error: #(unbound_func #(div 3))
+```
+
+Since there is no ``#'div/3``. Instead, you will have to do this:
+
+```cl
+    > (div (list (p '"paragraph 1") (p '"paragraph 2") (p '"paragraph 3")))
+    ...
+```
+
+The elided output will contain some string data as raw lists of characters. If
+you would like to see the whole thing printed as string data, you can do this:
+
+```cl
+    > (set html (div
+                  (list
+                    (p '"paragraph 1")
+                    (p '"paragraph 2")
+                    (p '"paragraph 3"))))
+    ...
+    > (: io format '"~s~n" (list html))
+    <div><p>paragraph 1</p><p>paragraph 2</p><p>paragraph 3</p></div>
+    ok
 ```
 
 
@@ -177,10 +237,17 @@ Then the ``my-project.lfe`` file might look something like this:
     ...
     (make-html-response
       (html
-        (head
-          (title fetched-title))
-        (body
-          (main
-            (div '(class "dynamic content")
-                 fetched-content)))))
+        (list
+            (head
+              (title fetched-title))
+            (body
+              (main
+                (div '(class "dynamic content")
+                  (list
+                    (h1 fetched-title)
+                    (div fetched-content))))))))
 ```
+
+Note that, due to the current limitation of the generated HTML element function
+arities, we have to wrap parallel calls (e.g., ``(head ...) (body ...)`` in a
+``list``.
