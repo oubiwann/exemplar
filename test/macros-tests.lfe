@@ -8,7 +8,7 @@
 (include-lib "deps/lfeunit/include/lfeunit-macros.lfe")
 (include-lib "include/macros.lfe")
 
-(defelem b)
+(defelem special)
 
 (deftest defelem
-  (is-equal '"<b>my content</b>" (b '"my content")))
+  (is-equal '"<special>my content</special>" (special '"my content")))
