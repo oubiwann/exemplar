@@ -290,3 +290,6 @@ arities, we have to wrap sibling calls (e.g., ``(head ...) (body ...)`` in a
 Needless to say, one could also create custom templates via functions that
 generate partial HTML and have parameters/variables for addition HTML to be
 passed.
+
+For more information on using LFE with YAWS, be sure to check out the
+<a href="https://github.com/lfe/yaws-rest-starter">LFE REST example app</a>.
