@@ -116,4 +116,71 @@ Which will give the following output
 
 ### Using Exemplar with YAWS
 
-TBD
+If you are running a YAWS-based project, you can easily include exemplar in it.
+Any function that is returning content to YAWS can simply use the exemplar HTML
+macros.
+
+For instance, let's say you had a YAWS project that was configured like so:
+
+```apache
+      logdir = logs
+      ebin_dir = deps/yaws/var/yaws/ebin
+      ebin_dir = ebin
+      log_resolve_hostname = false
+      fail_on_bind_err = true
+
+      <server localhost>
+              port = 5099
+              listen = 0.0.0.0
+              appmods = </, my-project>
+              docroot = www
+      </server>
+```
+
+Then the ``my-project.lfe`` file might look something like this:
+```cl
+(defmodule my-project
+  (export all))
+
+(include-lib "deps/exemplar/include/html-macros.lfe")
+
+(defun out (arg-data)
+  "This function is executed by YAWS. It is the YAWS entry point for our app."
+  (let ((path-info (: string tokens
+                      (parse-path arg-data)
+                      '"/")))
+    (routes path-info arg-data)))
+
+(defun routes
+  "Routes for our app."
+  ;; /content/:id
+  (((list '"content" item-id) arg-data)
+   (content-api item-id arg-data))
+  ;; potentially many other routes
+  ...
+  ;; When nothing matches, do this
+  ((path method arg)
+    (: io format
+      '"Unmatched route!~n Path-info: ~p~n arg-data: ~p~n~n"
+      (list path arg))
+    (make-error-response '"Unmatched route.")))
+
+(defun make-html-response (html)
+  (tuple 'content
+         '"text/html"
+         html))
+
+(defun content-api (id request-data)
+  ;; pull content from a data store
+  (let ((fetched-title (...))
+        (fetched-content (...)))
+    ...
+    (make-html-response
+      (html
+        (head
+          (title fetched-title))
+        (body
+          (main
+            (div '(class "dynamic content")
+                 fetched-content)))))
+```
