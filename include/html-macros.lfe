@@ -1,4 +1,12 @@
-(include-file "include/macros.lfe")
+(defmacro defelem arg
+  (let ((tag (car arg)))
+    `(progn
+      (defun ,tag ()
+        (: exemplar-html make-html (atom_to_list ',tag)))
+      (defun ,tag (content)
+        (: exemplar-html make-html (atom_to_list ',tag) content))
+      (defun ,tag (attrs content)
+        (: exemplar-html make-html (atom_to_list ',tag) attrs content)))))
 
 ;; root
 (defelem html)
