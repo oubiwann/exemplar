@@ -7,6 +7,19 @@
 
 ## Introduction
 
+### Supported Tags
+
+<a href="https://raw.github.com/oubiwann/exemplar/master/resources/images/HTML5_Logo_512.png"><img src="resources/images/HTML5_Logo_tiny.png"/></a><br/>
+
+Right now, only HTML5 is supported. Feel free to submit pull requests to support
+older/different tags/elements.
+
+The list of tags was obtained from
+<a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/HTML5_element_list">Mozilla's
+HTML 5 documentation</a>
+
+Note that XML namespacing hasn't been explored yet, but **should** be possible.
+
 ### Current Status
 
 As you can see in the example usage below, you can use exemplar to build HTML
