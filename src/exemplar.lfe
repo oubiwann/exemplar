@@ -1,6 +1,8 @@
 (defmodule exemplar
   (export all))
 
+(include-file "include/macros.lfe")
+
 (defun space () '" ")
 
 (defun slash () '"/")
