@@ -72,10 +72,19 @@ Start the REPL:
     $ make shell
 ```
 
-Then:
+Then, from a clone of exemplar:
+
+```lisp
+    > (slurp '"src/exemplar-html.lfe")
+    #(ok exemplar-html)
+    > (html (body (div (p '"Here is somem content")))))
+```
+
+Or, from your own project with exemplar as a dep:
 
 ```lisp
     > (slurp '"deps/exemplar/src/exemplar-html.lfe")
+    #(ok exemplar-html)
     > (html (body (div (p '"Here is somem content")))))
 ```
 
@@ -251,3 +260,7 @@ Then the ``my-project.lfe`` file might look something like this:
 Note that, due to the current limitation of the generated HTML element function
 arities, we have to wrap parallel calls (e.g., ``(head ...) (body ...)`` in a
 ``list``.
+
+Needless to say, one could also create custom templates via functions that
+generate partial HTML and have parameters/variables for addition HTML to be
+passed in.
