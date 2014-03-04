@@ -64,6 +64,8 @@ And then do the usual:
 
 ### Interactive Use from the REPL
 
+#### HTML
+
 Start the REPL:
 
 ```bash
@@ -73,7 +75,7 @@ Start the REPL:
 Then:
 
 ```lisp
-    > (slurp '"src/exemplar-html.lfe")
+    > (slurp '"deps/exemplar/src/exemplar-html.lfe")
     > (html (body (div (p '"Here is somem content")))))
 ```
 
@@ -81,6 +83,34 @@ Which will give the following output
 
 ```html
     "<html><body><div><p>Here is somem content</p></div></body></html>"
+```
+
+
+#### Custom Elements
+
+You can create your own elements, too. In your project that has exemplar set
+up as a dependency, create a module and ``include-lib`` the macros file:
+
+```cl
+(defmodule my-project
+  (export all))
+
+(include-lib "deps/exemplar/include/macros.lfe")
+
+(defelem custom-elem)
+```
+
+Then, you can ``make shell``, ``slurp`` that file, and use your new element:
+
+```cl
+    > (slurp '"src/my-project.lfe")
+    > (custom-elem (custom-elem '"much wow"))
+```
+
+Which will give the following output
+
+```html
+    "<custom-elem><custom-elem>much wow</custom-elem></custom-elem>"
 ```
 
 
