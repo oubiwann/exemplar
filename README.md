@@ -7,6 +7,16 @@
 
 ## Introduction
 
+### Current Status
+
+As you can see in the example usage below, you can use exemplar to build HTML
+strings using LFE S-expressions. However, due note that the project has *just*
+started and there are lots of unexplored HTML edge-cases that simply won't work
+right now.
+
+If you come across anything, feel free to submit a bug in the github issue
+tracker, or even send us a pull request :-)
+
 
 ### About the Name
 
@@ -36,8 +46,8 @@ Just add it to your ``rebar.config`` deps:
 
 ```erlang
     {deps, [
-        {lfe, ".*", {git, "git://github.com/rvirding/lfe.git", "develop"}},
-        {lfeunit, ".*", {git, "git://github.com/lfe/lfeunit.git", ""}}
+        ...
+        {exemplar, ".*", {git, "git@github.com:oubiwann/exemplar.git", "master"}}
       ]}.
 ```
 
@@ -52,12 +62,18 @@ And then do the usual:
 
 ## Usage
 
-From the REPL:
+### Interactive Use from the REPL
+
+Start the REPL:
 
 ```bash
     $ make shell
 ```
+
+Then:
+
 ```lisp
+    > (slurp '"src/exemplar-html.lfe")
     > (html (body (div (p '"Here is somem content")))))
 ```
 
@@ -66,3 +82,8 @@ Which will give the following output
 ```html
     "<html><body><div><p>Here is somem content</p></div></body></html>"
 ```
+
+
+### Using Exemplar with YAWS
+
+TBD
