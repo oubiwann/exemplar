@@ -174,6 +174,27 @@ Another common use case:
     "<ul><li>a</li><li>b</li><li>c</li></ul>"
 ```
 
+Note that the 1-arity generated functions have some smarts: in addition to being
+able to handle lists of elements, they can also handle lists of attributes and
+string content. You've seen the string content and list arguments above; here's
+``#'div/1`` with attributes:
+
+```cl
+    > (div '(id "div-1" class "big"))
+    "<div id=\"div-1\" class=\"big\" />"
+```
+
+Here's an example using a variable:
+
+```cl
+    > (set class '"bigger")
+    "bigger"
+    > (div `(id "div-1" class ,class))
+    "<div id=\"div-1\" class=\"bigger\" />"
+    > (div (list 'id '"div-1" 'class class))
+    "<div id=\"div-1\" class=\"bigger\" />"
+```
+
 
 ### Using Exemplar with YAWS
 
