@@ -164,22 +164,14 @@ Since there is no ``#'div/3``. Instead, you will have to do this:
 
 ```cl
     > (div (list (p '"paragraph 1") (p '"paragraph 2") (p '"paragraph 3")))
-    ...
+    "<div><p>paragraph 1</p><p>paragraph 2</p><p>paragraph 3</p></div>"
 ```
 
-The elided output will contain some string data as raw lists of characters. If
-you would like to see the whole thing printed as string data, you can do this:
+Another common use case:
 
 ```cl
-    > (set html (div
-                  (list
-                    (p '"paragraph 1")
-                    (p '"paragraph 2")
-                    (p '"paragraph 3"))))
-    ...
-    > (: io format '"~s~n" (list html))
-    <div><p>paragraph 1</p><p>paragraph 2</p><p>paragraph 3</p></div>
-    ok
+    > (ul (list (li '"a") (li '"b") (li '"c")))
+    "<ul><li>a</li><li>b</li><li>c</li></ul>"
 ```
 
 
@@ -258,9 +250,9 @@ Then the ``my-project.lfe`` file might look something like this:
 ```
 
 Note that, due to the current limitation of the generated HTML element function
-arities, we have to wrap parallel calls (e.g., ``(head ...) (body ...)`` in a
+arities, we have to wrap sibling calls (e.g., ``(head ...) (body ...)`` in a
 ``list``.
 
 Needless to say, one could also create custom templates via functions that
 generate partial HTML and have parameters/variables for addition HTML to be
-passed in.
+passed.
