@@ -1,7 +1,8 @@
-Expm.Package.new(name: "exemplar",
-                 description: "PROJECT DESCRIPTION",
-                 version: "0.0.1",
-                 keywords: ["LFE", "Lisp", "Library", "API"],
-                 maintainers: [[name: "YOUR NAME",
-                                email: "YOUR@EMAIL.com"]],
-                 repositories: [[github: "YOUR_GITHUB_NAME/exemplar"]])
+Expm.Package.new(
+    name: "exemplar",
+    description: "HTML as S-Expressions for LFE",
+    version: "0.0.1",
+    keywords: ["LFE", "Lisp", "Library", "HTML", "YAWS"],
+    maintainers: [[name: "Duncan McGreggor",
+                   email: "oubiwann@cogitat.io"]],
+    repositories: [[github: "lfe/exemplar"]])
