@@ -23,7 +23,7 @@ Note that XML namespacing hasn't been explored yet, but *should* be possible.
 ### Current Status
 
 As you can see in the example usage below, you can use exemplar to build HTML
-strings using LFE S-expressions. However, due note that the project has *just*
+strings using LFE S-expressions. However, do note that the project has *just*
 started and there are lots of unexplored HTML edge-cases that simply won't work
 right now.
 
