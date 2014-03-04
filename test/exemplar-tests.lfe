@@ -7,6 +7,13 @@
 
 (include-lib "deps/lfeunit/include/lfeunit-macros.lfe")
 
+(deftest attrs?
+  (is (: exemplar attrs? '(class "css")))
+  (is (: exemplar attrs? '(class "css" id "asdf-1")))
+  (is-not (: exemplar attrs? '()))
+  (is-not (: exemplar attrs? '(class "css" "id" "asdf-1")))
+  (is-not (: exemplar attrs? '(1 2 3 4))))
+
 (deftest attr-to-string
   (is-equal '"href=\"http://url\" "
             (: exemplar attr-to-string 'href '"http://url")))

@@ -1,5 +1,11 @@
 (defmodule exemplar
-  (export all))
+  (export all)
+  (import
+    (from lfe-utils
+      (atom? 1)
+      (even? 1)
+      (list? 1)
+      (partition-list 1))))
 
 (include-file "include/macros.lfe")
 
@@ -16,6 +22,17 @@
       (slash)
       (closing-bracket)))
 
+(defun attrs? (data)
+  "a list of attr/value key pairs has to have an even number of elements. The
+  first element also has to be an atom. In fact, all even-indexed (zero-based
+  counting) elements have to be atoms.
+
+  If these criteria are not met, the list is not an attr collection."
+  (let* ((len (length data))
+         ((tuple names values) (partition-list data))
+         (evens-atoms? (== (length names) (length values))))
+    (and (list? data) (and (> len 0) (and (even? len) evens-atoms?)))))
+
 (defun attr-to-string (name value)
   (++ (atom_to_list name)
       '"=\""
@@ -23,7 +40,7 @@
       '"\" "))
 
 (defun attrs-to-string (attrs)
-  (let (((tuple names values) (: lfe-utils partition-list attrs)))
+  (let (((tuple names values) (partition-list attrs)))
     (: lists concat
       (: lists zipwith #'attr-to-string/2 names values))))
 
