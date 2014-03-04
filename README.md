@@ -146,7 +146,8 @@ generates functions with three different arities. For instance,
 (defelem div)
 ```
 
-The ``defelem`` macro in ``include/macros.lfe`` generates three functions:
+The ``defelem`` macro in ``include/macros.lfe`` generates three functions with
+this definition:
 
 * ``div/0``
 * ``div/1``
