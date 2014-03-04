@@ -11,4 +11,5 @@
 (defelem special)
 
 (deftest defelem
+  (is-equal '"<special />" (special))
   (is-equal '"<special>my content</special>" (special '"my content")))
