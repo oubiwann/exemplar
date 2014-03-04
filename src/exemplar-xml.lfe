@@ -1,6 +1,9 @@
 (defmodule exemplar-xml
   (export all))
 
+(defun xml (tag)
+  (++ (: exemplar self-closing-tag tag)))
+
 (defun xml (tag content)
   (++ (: exemplar opening-tag tag)
       content
