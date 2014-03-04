@@ -32,7 +32,7 @@ get-version:
 	@echo -n package.exs: ''
 	@grep version package.exs |awk '{print $$2}'|sed -e 's/,//g'
 	@echo -n git tags: ''
-	@git tag
+	@echo `git tag`
 
 # Note that this make target expects to be used like so:
 #>--$ ERL_LIB=some/path make get-install-dir
