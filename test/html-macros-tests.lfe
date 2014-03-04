@@ -8,5 +8,8 @@
 (include-lib "deps/lfeunit/include/lfeunit-macros.lfe")
 (include-file "include/html-macros.lfe")
 
-(deftest noop
-  (is-equal '"" '""))
+(deftest defelem
+  (is-equal '"<special>my content</special>" (special '"my content")))
+
+(deftest html
+  (is-equal '"" (html)))
