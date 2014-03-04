@@ -7,10 +7,10 @@
 
 (include-lib "deps/lfeunit/include/lfeunit-macros.lfe")
 
-(deftest xml
+(deftest make-xml
   (is-equal '"<pre>some code</pre>"
-            (: exemplar-xml xml '"pre" '"some code")))
+            (: exemplar-xml make-xml '"pre" '"some code")))
 
-(deftest xml-with-attrs
+(deftest make-xml-with-attrs
   (is-equal '"<pre class=\"lisp\">some code</pre>"
-            (: exemplar-xml xml '"pre" '(class "lisp") '"some code")))
+            (: exemplar-xml make-xml '"pre" '(class "lisp") '"some code")))
