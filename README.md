@@ -18,7 +18,7 @@ The list of tags was obtained from
 <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/HTML5_element_list">Mozilla's
 HTML 5 documentation</a>
 
-Note that XML namespacing hasn't been explored yet, but **should** be possible.
+Note that XML namespacing hasn't been explored yet, but *should* be possible.
 
 ### Current Status
 
