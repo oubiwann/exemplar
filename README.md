@@ -294,5 +294,16 @@ Needless to say, one could also create custom templates via functions that
 generate partial HTML and have parameters/variables for addition HTML to be
 passed.
 
+If you'd like to see this example running, download
+<a href="https://github.com/lfe/lfetool">lfetool</a>, install it, and then
+execute these commands:
+```bash
+  $ lfetool new yaws my-web-proj
+  $ cd my-web-proj
+  $ make dev
+```
+
+Then point your browser at <a href="http://localhost:5099/">http://localhost:5099/</a>.
+
 For more information on using LFE with YAWS, be sure to check out the
 <a href="https://github.com/lfe/yaws-rest-starter">LFE REST example app</a>.
