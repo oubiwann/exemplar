@@ -270,10 +270,9 @@ Then the ``my-project.lfe`` file might look something like this:
 
 (defun content-api (id request-data)
   ;; pull content from a data store
-  (let ((fetched-title (...))
-        (fetched-content (...)))
-    ...
-    (make-html-response
+  (let ((fetched-title '"Queried Title")
+        (fetched-content '"Some super-great queried lorem ipsum."))
+    (: {{PROJECT}}-util make-200-result
       (html
         (list
             (head
@@ -283,7 +282,8 @@ Then the ``my-project.lfe`` file might look something like this:
                 (div '(class "dynamic content")
                   (list
                     (h1 fetched-title)
-                    (div fetched-content))))))))
+                    (h2 (++ '"Item " item-id))
+                    (div (p fetched-content)))))))))))
 ```
 
 Note that, due to the current limitation of the generated HTML element function
