@@ -270,10 +270,9 @@ Then the ``my-project.lfe`` file might look something like this:
 
 (defun content-api (id request-data)
   ;; pull content from a data store
-  (let ((fetched-title (...))
-        (fetched-content (...)))
-    ...
-    (make-html-response
+  (let ((fetched-title '"Queried Title")
+        (fetched-content '"Some super-great queried lorem ipsum."))
+    (: {{PROJECT}}-util make-200-result
       (html
         (list
             (head
@@ -283,7 +282,8 @@ Then the ``my-project.lfe`` file might look something like this:
                 (div '(class "dynamic content")
                   (list
                     (h1 fetched-title)
-                    (div fetched-content))))))))
+                    (h2 (++ '"Item " item-id))
+                    (div (p fetched-content)))))))))))
 ```
 
 Note that, due to the current limitation of the generated HTML element function
@@ -293,6 +293,17 @@ arities, we have to wrap sibling calls (e.g., ``(head ...) (body ...)`` in a
 Needless to say, one could also create custom templates via functions that
 generate partial HTML and have parameters/variables for addition HTML to be
 passed.
+
+If you'd like to see this example running, download
+<a href="https://github.com/lfe/lfetool">lfetool</a>, install it, and then
+execute these commands:
+```bash
+  $ lfetool new yaws my-web-proj
+  $ cd my-web-proj
+  $ make dev
+```
+
+Then point your browser at <a href="http://localhost:5099/">http://localhost:5099/</a>.
 
 For more information on using LFE with YAWS, be sure to check out the
 <a href="https://github.com/lfe/yaws-rest-starter">LFE REST example app</a>.
