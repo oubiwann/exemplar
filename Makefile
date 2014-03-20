@@ -9,14 +9,14 @@ LFE = $(LFE_DIR)/bin/lfe
 LFEC = $(LFE_DIR)/bin/lfec
 LFE_UTILS_DIR = $(DEPS)/lfe-utils
 LFEUNIT_DIR = $(DEPS)/lfeunit
-# Note that ERL_LIBS is for running this project in development and that
-# ERL_LIB is for installation.
-ERL_LIBS = $(LFE_DIR):$(LFE_UTILS_DIR):$(LFEUNIT_DIR):./
 SOURCE_DIR = ./src
 OUT_DIR = ./ebin
 TEST_DIR = ./test
 TEST_OUT_DIR = ./.eunit
 FINISH = -run init stop -noshell
+# Note that ERL_LIBS is for running this project in development and that
+# ERL_LIB is for installation.
+ERL_LIBS = $(shell find $(DEPS) -maxdepth 1 -exec echo -n '{}:' \;|sed 's/:$$/:./'):$(TEST_OUT_DIR)
 
 get-version:
 	@echo
@@ -51,37 +51,37 @@ $(EXPM): $(BIN_DIR)
 	chmod +x $(EXPM)
 
 get-deps:
-	rebar get-deps
+	@rebar get-deps
 	for DIR in $(wildcard $(DEPS)/*); \
 	do cd $$DIR; echo "Updating $$DIR ..."; \
 	git pull; cd - > /dev/null; done
 
 clean-ebin:
-	rm -f $(OUT_DIR)/*.beam
+	@rm -f $(OUT_DIR)/*.beam
 
 clean-eunit:
-	rm -rf $(TEST_OUT_DIR)
+	@rm -rf $(TEST_OUT_DIR)
 
 compile: get-deps clean-ebin
-	rebar compile
+	@rebar compile
 
 compile-only: clean-ebin
-	rebar compile skip_deps=true
+	@rebar compile skip_deps=true
 
 compile-tests: clean-eunit
-	mkdir -p $(TEST_OUT_DIR)
-	ERL_LIBS=$(ERL_LIBS) $(LFEC) -o $(TEST_OUT_DIR) $(TEST_DIR)/*tests.lfe
+	@mkdir -p $(TEST_OUT_DIR)
+	@ERL_LIBS=$(ERL_LIBS) $(LFEC) -o $(TEST_OUT_DIR) $(TEST_DIR)/*tests.lfe
 
 shell: compile
-	clear
-	ERL_LIBS=$(ERL_LIBS) $(LFE) -pa $(TEST_OUT_DIR)
+	@clear
+	@ERL_LIBS=$(ERL_LIBS) $(LFE) -pa $(TEST_OUT_DIR)
 
 shell-only: compile-only
-	clear
-	ERL_LIBS=$(ERL_LIBS) $(LFE) -pa $(TEST_OUT_DIR)
+	@clear
+	@ERL_LIBS=$(ERL_LIBS) $(LFE) -pa $(TEST_OUT_DIR)
 
 clean: clean-ebin clean-eunit
-	rebar clean
+	@rebar clean
 
 check: compile compile-tests
 	@clear;
@@ -90,6 +90,16 @@ check: compile compile-tests
 check-only: compile-only compile-tests
 	@clear;
 	@rebar eunit verbose=1 skip_deps=true
+
+check-travis: compile compile-tests
+	@echo "Running unit tests ..."
+	@ERL_LIBS=$(ERL_LIBS) erl -pa .eunit -noshell \
+	-eval "eunit:test({inparallel,[\
+		`ls .eunit| \
+		sed -e 's/.beam//'| \
+		awk '{print "\x27" $$1 "\x27"}'| \
+		sed ':a;N;$$!ba;s/\n/,/g'`]},[verbose])" \
+	-s init stop
 
 push-all:
 	git push --all
