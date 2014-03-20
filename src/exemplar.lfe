@@ -73,3 +73,9 @@
 
 (defun self-closing-tag (tag attrs)
   (-opening-tag tag attrs (self-closing-bracket)))
+
+(defun non-closing-tag (tag)
+  (-opening-tag tag (closing-bracket)))
+
+(defun non-closing-tag (tag attrs)
+  (-opening-tag tag attrs (closing-bracket)))

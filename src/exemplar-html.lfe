@@ -33,6 +33,8 @@
 (defun make-html
   (('"!doctype" data)
     (: io_lib format (++ (handle-doctype data) '"~n") '()))
+  (('"link" attrs)
+    (: exemplar non-closing-tag '"link" attrs))
   ((tag content-or-attrs)
    (let ((data (: exemplar-xml make-xml tag content-or-attrs)))
      (cond
