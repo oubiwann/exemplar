@@ -9,6 +9,7 @@
         (: exemplar-html make-html (atom_to_list ',tag) attrs content)))))
 
 ;; root
+(defelem !doctype)
 (defelem html)
 
 ;; document metadata
