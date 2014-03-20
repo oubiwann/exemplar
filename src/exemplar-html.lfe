@@ -35,6 +35,8 @@
     (: io_lib format (++ (handle-doctype data) '"~n") '()))
   (('"link" attrs)
     (: exemplar non-closing-tag '"link" attrs))
+  (('"script" attrs)
+    (make-html '"script" attrs '""))
   ((tag content-or-attrs)
    (let ((data (: exemplar-xml make-xml tag content-or-attrs)))
      (cond
