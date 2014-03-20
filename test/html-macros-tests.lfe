@@ -16,10 +16,10 @@
 
 (deftest !doctype
   (is-equal '"<!DOCTYPE html>" (!doctype 'html))
-  (is-equal '"<!DOCTYPE html>" (!doctype (list 'html)))
-  (is-equal '"<!DOCTYPE HTML PUBLIC \"a\" \"b\">"
-            (!doctype (list 'html 'public '"a" '"b")))
-  (is-equal '"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"
-            (!doctype (list 'foo 'bar
-                        '"-//W3C//DTD HTML 4.01//EN"
-                        '"http://www.w3.org/TR/html4/strict.dtd"))))
+  (is-equal '"<!DOCTYPE html>" (!doctype '(html)))
+  (is-equal '"<!DOCTYPE html PUBLIC \"a\" \"b\">"
+            (!doctype '(html public "a" "b")))
+  (is-equal '"<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"
+            (!doctype '(foo bar
+                         "-//W3C//DTD HTML 4.01//EN"
+                         "http://www.w3.org/TR/html4/strict.dtd"))))

@@ -19,15 +19,15 @@
   (: exemplar opening-tag
     (: lists flatten
       (: io_lib format
-        '"!DOCTYPE HTML PUBLIC \"~s\" \"~s\""
+        '"!DOCTYPE html PUBLIC \"~s\" \"~s\""
         (list arg1 arg2)))))
 
 (defun handle-doctype
   (('html)
     (doctype))
-  (((list 'html))
+  (('(html))
     (doctype))
-  (((list _ _ arg1 arg2))
+  ((`(,_ ,_ ,arg1 ,arg2))
     (doctype arg1 arg2)))
 
 (defun make-html
