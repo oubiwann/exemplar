@@ -32,7 +32,7 @@
 
 (defun make-html
   (('"!doctype" data)
-    (handle-doctype data))
+    (: io_lib format (++ (handle-doctype data) '"~n")))
   ((tag content-or-attrs)
    (let ((data (: exemplar-xml make-xml tag content-or-attrs)))
      (cond
