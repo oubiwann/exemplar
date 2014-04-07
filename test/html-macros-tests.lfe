@@ -26,5 +26,7 @@
 
 (deftest link
   (is-equal '"<link rel=\"stylesheet\" src=\"some-url\">"
-            (link '(rel "stylesheet" src "some-url")))
+            (link '(rel "stylesheet" src "some-url"))))
+
+(deftest script
   )
