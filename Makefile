@@ -3,12 +3,12 @@ LIB = $(PROJECT)
 DEPS = ./deps
 BIN_DIR = ./bin
 EXPM = $(BIN_DIR)/expm
-LFETOOL=/usr/local/bin/lfetool
+LFETOOL=$(BIN_DIR)/lfetool
 SOURCE_DIR = ./src
 OUT_DIR = ./ebin
 TEST_DIR = ./test
 TEST_OUT_DIR = ./.eunit
-SCRIPT_PATH=.:./bin:$(PATH)
+SCRIPT_PATH=.:./bin:$(PATH):/usr/local/bin
 
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
@@ -16,13 +16,13 @@ $(BIN_DIR):
 $(LFETOOL): $(BIN_DIR)
 	curl -o ./lfetool https://raw.github.com/lfe/lfetool/master/lfetool
 	chmod 755 ./lfetool
-	mv ./lfetool ./bin/
+	mv ./lfetool $(BIN_DIR)
 
 get-version:
 	@PATH=$(SCRIPT_PATH) lfetool info version
 
 $(EXPM): $(BIN_DIR)
-	@PATH=$(SCRIPT_PATH) lfetool install expm
+	@PATH=$(SCRIPT_PATH) lfetool install expm $(BIN_DIR)
 
 get-deps:
 	@echo "Getting dependencies ..."
@@ -102,4 +102,4 @@ upload: $(EXPM) get-version
 	@echo
 	@echo "Continue with upload? "
 	@read
-	$(EXPM) publish
+	@PATH=$(SCRIPT_PATH) $(EXPM) publish
