@@ -17,7 +17,7 @@
 (deftest !doctype
   (is-equal '"<!DOCTYPE html>\n" (lists:flatten (!doctype 'html)))
   (is-equal '"<!DOCTYPE html>\n" (lists:flatten (!doctype '(html))))
-  (is-equal '"<!DOCTYPE xhtml PUBLIC \"a\" \"b\">\n"
+  (is-equal '"<!DOCTYPE html PUBLIC \"a\" \"b\">\n"
             (lists:flatten (!doctype '(html public "a" "b"))))
   (is-equal '"<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
             (lists:flatten (!doctype '(foo bar
