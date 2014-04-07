@@ -9,3 +9,4 @@ debug-*
 deps
 ebin/*
 erl_crash.dump
+.rebar
