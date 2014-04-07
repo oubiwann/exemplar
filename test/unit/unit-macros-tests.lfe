@@ -1,4 +1,4 @@
-(defmodule macros-tests
+(defmodule unit-macros-tests
   (export all)
   (import
     (from lfeunit-util

@@ -1,4 +1,4 @@
-(defmodule exemplar-xml-tests
+(defmodule unit-exemplar-xml-tests
   (export all)
   (import
     (from lfeunit-util

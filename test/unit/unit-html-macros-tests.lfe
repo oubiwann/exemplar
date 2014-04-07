@@ -1,4 +1,4 @@
-(defmodule html-macros-tests
+(defmodule unit-html-macros-tests
   (export all)
   (import
     (from lfeunit-util

@@ -1,4 +1,4 @@
-(defmodule exemplar-html-tests
+(defmodule unit-exemplar-html-tests
   (export all)
   (import
     (from lfeunit-util
