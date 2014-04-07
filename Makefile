@@ -14,15 +14,17 @@ $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 
 $(LFETOOL): $(BIN_DIR)
-	curl -o ./lfetool https://raw.github.com/lfe/lfetool/master/lfetool
-	chmod 755 ./lfetool
+	@[ -f $(LFETOOL) ] || \
+	curl -o ./lfetool https://raw.github.com/lfe/lfetool/master/lfetool && \
+	chmod 755 ./lfetool && \
 	mv ./lfetool $(BIN_DIR)
 
 get-version:
 	@PATH=$(SCRIPT_PATH) lfetool info version
 
 $(EXPM): $(BIN_DIR)
-	@PATH=$(SCRIPT_PATH) lfetool install expm $(BIN_DIR)
+	@[ -f $(EXPM) ] || \
+	PATH=$(SCRIPT_PATH) lfetool install expm $(BIN_DIR)
 
 get-deps:
 	@echo "Getting dependencies ..."
