@@ -2,11 +2,14 @@
   (let ((tag (car arg)))
     `(progn
       (defun ,tag ()
-        (: exemplar-html make-html (atom_to_list ',tag)))
+        (lists:flatten
+          (exemplar-html:make-html (atom_to_list ',tag))))
       (defun ,tag (content)
-        (: exemplar-html make-html (atom_to_list ',tag) content))
+        (lists:flatten
+          (exemplar-html:make-html (atom_to_list ',tag) content)))
       (defun ,tag (attrs content)
-        (: exemplar-html make-html (atom_to_list ',tag) attrs content)))))
+        (lists:flatten
+          (exemplar-html:make-html (atom_to_list ',tag) attrs content))))))
 
 ;; root
 (defelem !doctype)
