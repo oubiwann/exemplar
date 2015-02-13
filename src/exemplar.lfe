@@ -1,12 +1,10 @@
 (defmodule exemplar
   (export all)
   (import
-    (from lfe-utils
-      (atom? 1)
-      (even? 1)
-      (list? 1)
+    (from lutil-type
       (partition-list 1))))
 
+(include-lib "lutil/include/predicates.lfe")
 (include-file "include/macros.lfe")
 
 (defun space () '" ")
@@ -53,7 +51,7 @@
   (++ (opening-bracket)
       tag
       (space)
-      (: lfe-utils strip (attrs-to-string attrs))
+      (: lutil-text strip (attrs-to-string attrs))
       bracket))
 
 (defun opening-tag (tag)
