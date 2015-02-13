@@ -1,11 +1,12 @@
 (defmodule unit-exemplar-xml-tests
+  (behaviour ltest-unit)
   (export all)
   (import
-    (from lfeunit-util
+    (from ltest
       (check-failed-assert 2)
       (check-wrong-assert-exception 2))))
 
-(include-lib "deps/lfeunit/include/lfeunit-macros.lfe")
+(include-lib "ltest/include/ltest-macros.lfe")
 
 (deftest make-xml
   (is-equal '"<pre>some code</pre>"
