@@ -8,14 +8,27 @@ SOURCE_DIR = ./src
 OUT_DIR = ./ebin
 TEST_DIR = ./test
 TEST_OUT_DIR = ./.eunit
-SCRIPT_PATH=.:./bin:$(PATH):/usr/local/bin
+SCRIPT_PATH=$(DEPS)/lfe/bin:.:./bin:"$(PATH)":/usr/local/bin
+ifeq ($(shell which lfetool),)
+	LFETOOL=$(BIN_DIR)/lfetool
+else
+	LFETOOL=lfetool
+endif
+ERL_LIBS = .:..:../exemplar:$(shell $(LFETOOL) info erllibs)
+OS := $(shell uname -s)
+ifeq ($(OS),Linux)
+	HOST=$(HOSTNAME)
+endif
+ifeq ($(OS),Darwin)
+	HOST = $(shell scutil --get ComputerName)
+endif
 
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 
 $(LFETOOL): $(BIN_DIR)
 	@[ -f $(LFETOOL) ] || \
-	curl -L -o ./lfetool https://raw.github.com/lfe/lfetool/master/lfetool && \
+	curl -L -o ./lfetool https://raw.github.com/lfe/lfetool/dev-v1/lfetool && \
 	chmod 755 ./lfetool && \
 	mv ./lfetool $(BIN_DIR)
 
