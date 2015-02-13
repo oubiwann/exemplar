@@ -80,6 +80,13 @@ check-all-with-deps: compile check-unit-only check-integration-only \
 check-all: get-deps compile-no-deps
 	@PATH=$(SCRIPT_PATH) lfetool tests all
 
+check-runner-ltest: compile-no-deps compile-tests
+	@clear
+	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) \
+	erl -cwd "`pwd`" -listener ltest-listener -eval \
+	"case 'ltest-runner':all() of ok -> halt(0); _ -> halt(127) end" \
+	-noshell
+
 check: check-unit-with-deps
 
 check-travis: $(LFETOOL) check
