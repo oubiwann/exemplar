@@ -1,12 +1,10 @@
 (defmodule exemplar-html
   (export all)
   (import
-    (from lfe-utils
-      (string? 1)
-      (list? 1))
     (from exemplar
       (attrs? 1))))
 
+(include-lib "lutil/include/predicates.lfe")
 (include-file "include/html-macros.lfe")
 
 (defun make-html (tag)
@@ -55,4 +53,3 @@
 
 (defun make-html (tag attrs content)
   (: exemplar-xml make-xml tag attrs content))
-

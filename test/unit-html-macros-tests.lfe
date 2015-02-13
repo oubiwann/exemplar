@@ -1,11 +1,12 @@
 (defmodule unit-html-macros-tests
+  (behaviour ltest-unit)
   (export all)
   (import
-    (from lfeunit-util
+    (from ltest
       (check-failed-assert 2)
       (check-wrong-assert-exception 2))))
 
-(include-lib "deps/lfeunit/include/lfeunit-macros.lfe")
+(include-lib "ltest/include/ltest-macros.lfe")
 (include-file "include/html-macros.lfe")
 
 (deftest defelem
